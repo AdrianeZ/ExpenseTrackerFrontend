@@ -1,8 +1,19 @@
 import React from 'react';
-import './App.css';
+import {Route, Routes} from "react-router-dom";
+import {MainNav} from "./components/Layout/MainNav";
+import {AuthForm} from "./components/Forms/AuthForm";
 
 
-function App() {
+const App = () => {
+    return (
+        <>
+            <MainNav/>
+            <Routes>
+                <Route path="/signup" element={<AuthForm/>}></Route>
+                <Route path="/login" element={<AuthForm/>}></Route>
+            </Routes>
+        </>
+    );
 }
 
-export default App;
+export {App};
