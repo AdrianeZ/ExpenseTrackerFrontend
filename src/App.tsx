@@ -2,6 +2,7 @@ import React from 'react';
 import {Route, Routes} from "react-router-dom";
 import {MainNav} from "./components/Layout/MainNav";
 import {AuthForm} from "./components/Forms/AuthForm";
+import {MainContainer} from "./components/Layout/MainContainer";
 
 
 const App = () => {
@@ -9,8 +10,9 @@ const App = () => {
         <>
             <MainNav/>
             <Routes>
-                <Route path="/signup" element={<AuthForm/>}></Route>
-                <Route path="/login" element={<AuthForm/>}></Route>
+                <Route path="/register"
+                       element={<MainContainer><AuthForm isLoginForm={false}/></MainContainer>}></Route>
+                <Route path="/login" element={<MainContainer><AuthForm isLoginForm={true}/></MainContainer>}></Route>
             </Routes>
         </>
     );

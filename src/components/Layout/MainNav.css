@@ -22,3 +22,9 @@
     flex: 1;
     padding: 1rem;
 }
+
+.nav a
+{
+    text-decoration: none;
+    color: black;
+}

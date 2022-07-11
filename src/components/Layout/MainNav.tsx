@@ -1,6 +1,7 @@
 import React from "react";
 
 import "./MainNav.css";
+import {Link} from "react-router-dom";
 
 
 const MainNav = () => {
@@ -10,10 +11,10 @@ const MainNav = () => {
         </h1>
         <nav className="nav">
             <div>
-                SignUp
+                <Link to="/register">Register</Link>
             </div>
             <div>
-                Login
+                <Link to="/login">Login</Link>
             </div>
         </nav>
     </header>
