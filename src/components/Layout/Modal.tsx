@@ -23,23 +23,23 @@ const Modal = ({show, title, changeVisibility, children, type}: Props) => {
 
     if (!show) return null;
 
-    let modalStyles;
+    let modalBackground;
     switch(type)
     {
         case "error":
         {
-            modalStyles = {backgroundColor: "#FFCCCC"}
+            modalBackground = {backgroundColor: "#FFCCCC"}
         }
     }
 
     return (
         <>
             <Overlay/>
-            <div className="modal" style={modalStyles}>
+            <div className="modal" style={modalBackground}>
                 <div className="modal__title">{title}</div>
                 <div className="modal__content">{children}</div>
-                <div className="modal__button">
-                    <button onClick={changeVisibility}>Ok</button>
+                <div className="modal__button-container">
+                    <button onClick={changeVisibility} style={modalBackground}>Ok</button>
                 </div>
             </div>
 

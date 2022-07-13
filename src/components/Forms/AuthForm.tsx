@@ -1,10 +1,10 @@
 import {Link} from "react-router-dom";
 import {useFetch} from "../../hooks/useFetch";
+import {ChangeEvent, SyntheticEvent, useState, useContext, useEffect} from "react";
+import {AuthContext} from "../../context/authContext";
 import {CreateUserDto, LoginUserDto, HttpMethod, CreateUserResponse} from "types"
-import {ChangeEvent, SyntheticEvent, useState} from "react";
-
-import "./AuthForm.css";
 import {Modal} from "../Layout/Modal";
+import "./AuthForm.css";
 
 
 interface Props {
@@ -19,9 +19,20 @@ const AuthForm = ({isLoginForm}: Props) => {
         email: "",
         passwordConfirm: "",
         password: ""
-    })
+    });
 
-    const {error, isLoading, data, makeRequest} = useFetch<CreateUserResponse>();
+
+    const {error, isLoading, data, makeRequest, setError} = useFetch<CreateUserResponse>();
+
+    const {login} = useContext(AuthContext);
+
+    useEffect(() =>
+    {
+        if (data?.user.token) {
+            login(data.user.token, data.user.name);
+        }
+    },[data, login])
+
 
     const updateAuthForm = (event: ChangeEvent<HTMLInputElement>) => {
         setAuthFormData(prevState => ({...prevState, [event.target.name]: event.target.value}))
@@ -37,14 +48,13 @@ const AuthForm = ({isLoginForm}: Props) => {
     }
 
 
-    if (isLoading) {
-        return <p>Loading...</p>
+    const changeModalVisibility = () => {
+        setError(undefined);
     }
 
     return (
         <>
-            <Modal type="error" show={true} changeVisibility={() => {
-            }} title="Error">Wystąpił błąd</Modal>
+            <Modal type="error" show={!!error} changeVisibility={changeModalVisibility} title="Error">{error}</Modal>
             <section className="auth">
                 <header
                     className="auth__header">{isLoginForm ? "Login with Existing Account" : "Register new Account"}</header>
@@ -99,8 +109,8 @@ const AuthForm = ({isLoginForm}: Props) => {
                     </div>
                     <div className="auth__button-container">
                         <Link to={isLoginForm ? "/register" : "/login"}
-                              className="auth__switch">{isLoginForm ? "<-Login" : "<-Register"}</Link>
-                        <input type="submit" value="Submit"/>
+                              className="auth__switch">{isLoginForm ? "<-Register" : "<-Login"}</Link>
+                        {!isLoading ? <input type="submit" value="Submit"/> : "Sending Request"}
 
                     </div>
 

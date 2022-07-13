@@ -22,14 +22,11 @@ const useFetch = <T extends BaseResponse>() => {
             setError(data.errorMessage || "Unknown Server Error Occurred");
             return;
         }
-        if(error)
-        {
-            setError(undefined);
-        }
+
         setData(data);
     }
 
-    return {error, isLoading, data, makeRequest}
+    return {error, isLoading, data, setError, makeRequest}
 }
 
 export {useFetch};
