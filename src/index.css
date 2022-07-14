@@ -26,3 +26,36 @@ code {
 {
   margin: 1rem;
 }
+
+ input, select {
+  font-size: 1rem;
+  display: block;
+  width: 100%;
+  padding: .8rem;
+  border-radius: 5px;
+  outline: none;
+}
+
+ input:focus, input:focus {
+  border: 1px solid #009ffdff;
+}
+
+input[type="submit"], .auth__switch {
+    margin-top: 1rem;
+    width: 30%;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+    background-color: #009ffdff;
+    display: block;
+    vertical-align: center;
+    text-align: center;
+    border: none;
+    padding: 1rem;
+    border-radius: 5px;
+    color: white;
+    transition: 0.3s all;
+}
+
+
+

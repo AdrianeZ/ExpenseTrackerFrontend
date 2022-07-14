@@ -4,6 +4,7 @@ import {ChangeEvent, SyntheticEvent, useState, useContext, useEffect} from "reac
 import {AuthContext} from "../../context/authContext";
 import {CreateUserDto, LoginUserDto, HttpMethod, CreateUserResponse} from "types"
 import {Modal} from "../Layout/Modal";
+import {useNavigate} from "react-router-dom"
 import "./AuthForm.css";
 
 
@@ -21,6 +22,7 @@ const AuthForm = ({isLoginForm}: Props) => {
         password: ""
     });
 
+    const navigate = useNavigate();
 
     const {error, isLoading, data, makeRequest, setError} = useFetch<CreateUserResponse>();
 
@@ -30,8 +32,9 @@ const AuthForm = ({isLoginForm}: Props) => {
     {
         if (data?.user.token) {
             login(data.user.token, data.user.name);
+            navigate("/expenses");
         }
-    },[data, login])
+    },[data, login, navigate])
 
 
     const updateAuthForm = (event: ChangeEvent<HTMLInputElement>) => {
@@ -111,11 +114,8 @@ const AuthForm = ({isLoginForm}: Props) => {
                         <Link to={isLoginForm ? "/register" : "/login"}
                               className="auth__switch">{isLoginForm ? "<-Register" : "<-Login"}</Link>
                         {!isLoading ? <input type="submit" value="Submit"/> : "Sending Request"}
-
                     </div>
-
                 </form>
-
             </section>
         </>
     );

@@ -9,6 +9,7 @@
     -webkit-box-shadow: -1px 3px 35px -27px rgba(255, 255, 255, 1);
     -moz-box-shadow: -1px 3px 35px -27px rgba(255, 255, 255, 1);
     box-shadow: -1px 3px 35px -27px rgba(255, 255, 255, 1);
+    grid-column: 1/-1;
 }
 .auth__header
 {
@@ -16,18 +17,7 @@
     font-size: 1.5rem;
 }
 
-.auth input {
-    font-size: 1rem;
-    display: block;
-    width: 100%;
-    padding: .8rem;
-    border-radius: 5px;
-    outline: none;
-}
 
-.auth input:focus {
-    border: 1px solid #009ffdff;
-}
 
 .auth__button-container
 {
@@ -35,24 +25,4 @@
     justify-content: space-around;
 }
 
-.auth input[type="submit"], .auth__switch {
-    margin-top: 1rem;
-    width: 30%;
-    font-size: 1rem;
-    cursor: pointer;
-    text-decoration: none;
-    background-color: #009ffdff;
-    display: block;
-    vertical-align: center;
-    text-align: center;
-    border: none;
-    padding: 1rem;
-    border-radius: 5px;
-    color: white;
-    transition: 0.3s all;
-}
-
-.auth input[type="submit"]:hover, .auth__switch:hover {
-    background-color: #1B2430;
-}
 

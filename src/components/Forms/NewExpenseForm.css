@@ -1,0 +1,12 @@
+.expense-form
+{
+    grid-column: 1 / span 4;
+    padding: 1rem;
+}
+
+.expense-form input, .expense-form select
+{
+    display: block;
+    width: 80%;
+    margin: 0 auto;
+}

@@ -10,23 +10,33 @@ const useFetch = <T extends BaseResponse>() => {
     const makeRequest = async <U extends BodyInit>(url: string, method: HttpMethod = HttpMethod.GET, requestBody?: U, headers?: HeadersInit): Promise<void> => {
         setIsLoading(true);
         const response = await fetch(url, {method, body:requestBody, headers});
+
+        console.log(response);
+
         const data: T = await response.json();
 
+        const defaultErrorMessage = "Unknown Server Error Occurred";
         setIsLoading(false);
         if (!data.status) {
-            setError("Unknown Server Error Occurred");
+            setError(defaultErrorMessage);
             return;
         }
 
         if (data.status !== "success") {
-            setError(data.errorMessage || "Unknown Server Error Occurred");
+            setError(data.errorMessage ?? defaultErrorMessage);
+            return;
+        }
+
+        if(!response.ok)
+        {
+            setError(data.errorMessage ?? defaultErrorMessage)
             return;
         }
 
         setData(data);
     }
 
-    return {error, isLoading, data, setError, makeRequest}
+    return {error, isLoading, data, setError, makeRequest};
 }
 
 export {useFetch};

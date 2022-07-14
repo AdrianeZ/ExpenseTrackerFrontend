@@ -1,4 +1,8 @@
 .main-container {
-    max-width: 1440px;
-    margin: 0 auto;
+    color: white;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    max-width: 90vw;
+    align-items: center;
+    margin: 3rem auto;
 }
