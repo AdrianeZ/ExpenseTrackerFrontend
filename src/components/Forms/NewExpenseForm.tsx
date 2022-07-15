@@ -55,7 +55,7 @@ const NewExpenseForm = ({updateExpenses} : Props) => {
             <form onSubmit={submitExpenseForm}>
                 <div className="form-control">
                     <label htmlFor="name">
-                        <input type="text" required name="name" id="name" value={expense.name} placeholder="expense name"
+                        <input type="text" required name="name" id="name" value={expense.name} placeholder="Expense name"
                                onChange={updateExpenseForm}/>
                     </label>
                 </div>

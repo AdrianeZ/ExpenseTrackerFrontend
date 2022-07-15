@@ -38,6 +38,7 @@ const AuthForm = ({isLoginForm}: Props) => {
 
 
     const updateAuthForm = (event: ChangeEvent<HTMLInputElement>) => {
+
         setAuthFormData(prevState => ({...prevState, [event.target.name]: event.target.value}))
     }
 
@@ -45,7 +46,7 @@ const AuthForm = ({isLoginForm}: Props) => {
         e.preventDefault();
         const url = isLoginForm ? "http://localhost:3001/api/login" : "http://localhost:3001/api/register";
         const requestBody: CreateUserDto | LoginUserDto = isLoginForm ?
-            {email: authFormData.email, password: authFormData.password}
+            {email: authFormData.email, password: authFormData.password.trim()}
             : authFormData
         makeRequest(url, HttpMethod.POST, JSON.stringify(requestBody), {"Content-Type": "application/json"});
     }
@@ -111,9 +112,9 @@ const AuthForm = ({isLoginForm}: Props) => {
                         </label>}
                     </div>
                     <div className="auth__button-container">
-                        <Link to={isLoginForm ? "/register" : "/login"}
-                              className="auth__switch">{isLoginForm ? "<-Register" : "<-Login"}</Link>
-                        {!isLoading ? <input type="submit" value="Submit"/> : "Sending Request"}
+                         <Link to={isLoginForm ? "/register" : "/login"}
+                              className="auth__switch">{isLoginForm ? "Register" : "Login"}</Link>
+                        { !isLoading ? <input type="submit" value="Submit"/> : "Sending Request"}
                     </div>
                 </form>
             </section>

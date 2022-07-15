@@ -1,6 +1,7 @@
 import {Expense} from "../../../../ExpenseTrackerBackend/src/entities/Expense";
-import "./ExpenseItem.css";
 import {HttpMethod} from "types";
+import "./ExpenseItem.css";
+import {AiFillDelete} from "react-icons/ai"
 
 
 interface Props {
@@ -39,7 +40,7 @@ const ExpenseItem = ({expense, updateExpenses}: Props) => {
 
             </div>
 
-            <button onClick={() => removeExpense(expense.id)}>Delete</button>
+            <AiFillDelete size={40}  cursor="pointer" onClick={() => removeExpense(expense.id)}>Delete</AiFillDelete>
         </li>
     );
 };
