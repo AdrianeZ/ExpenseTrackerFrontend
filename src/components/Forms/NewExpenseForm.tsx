@@ -33,7 +33,10 @@ const NewExpenseForm = ({updateExpenses} : Props) => {
         const url = "http://localhost:3001/api/expenses";
         const requestBody: CreateExpenseDto = {name: expense.name, value: expense.value, categoryId: expense.categoryId}
         makeRequest(url, HttpMethod.POST, JSON.stringify(requestBody), {Authorization: `Bearer ${localStorage.getItem("token")}`, "Content-Type":"application/json"});
-        setExpense({name: "", value: 0, categoryId: expense.categoryId})
+        setExpense({name: "", value: 0, categoryId: expense.categoryId});
+        updateExpenses("http://localhost:3001/api/expenses", HttpMethod.GET, undefined, {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+        })
     }
 
 

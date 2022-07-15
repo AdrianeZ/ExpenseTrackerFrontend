@@ -10,12 +10,10 @@ import {ExpenseHistory} from "../components/Expenses/ExpenseHistory";
 
 const ExpenseView = () => {
 
-
     const {makeRequest, data} = useFetch<GetExpenseResponse>();
 
 
     useEffect(() => {
-        console.log(localStorage.getItem("token"));
         makeRequest("http://localhost:3001/api/expenses", HttpMethod.GET, undefined, {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
         })
@@ -25,7 +23,7 @@ const ExpenseView = () => {
         <>
             <NewExpenseForm updateExpenses={makeRequest}/>
             {data && <ExpenseChart expenses={data.expenses}/>}
-            {data && <ExpenseHistory expenses={data.expenses}/>}
+            {data && <ExpenseHistory updateExpenses={makeRequest} expenses={data.expenses}/>}
         </>
     )
 }
