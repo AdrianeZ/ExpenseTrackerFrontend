@@ -4,6 +4,8 @@ import {useEffect} from "react";
 import {useFetch} from "../hooks/useFetch";
 import {GetExpenseResponse} from "../../../ExpenseTrackerBackend/src/types/responses/expense";
 import {HttpMethod} from "types";
+import {ExpenseHistory} from "../components/Expenses/ExpenseHistory";
+
 
 
 const ExpenseView = () => {
@@ -23,6 +25,7 @@ const ExpenseView = () => {
         <>
             <NewExpenseForm updateExpenses={makeRequest}/>
             {data && <ExpenseChart expenses={data.expenses}/>}
+            {data && <ExpenseHistory expenses={data.expenses}/>}
         </>
     )
 }

@@ -4,7 +4,6 @@ import {Expense} from "../../../../ExpenseTrackerBackend/src/entities/Expense";
 import "./ExpenseChart.css";
 
 
-
 interface Props {
     expenses: any;
 }
@@ -14,8 +13,8 @@ type Iterable = {
 }
 
 
-const transformChartData = (expenseData: Expense[]): { mapper:Iterable, colors: string[] } => {
-    const colors =  [...new Set(expenseData.map(expense => expense.category.color))];
+const transformChartData = (expenseData: Expense[]): { mapper: Iterable, colors: string[] } => {
+    const colors = [...new Set(expenseData.map(expense => expense.category.color))];
     const mapper: Iterable = {};
 
     for (const expense of expenseData) {
@@ -29,28 +28,30 @@ const ExpenseChart = (props: Props) => {
 
     const data = transformChartData(props.expenses);
 
-    console.log(data);
-
     const chartData =
         {
             labels: Object.keys(data.mapper),
-            datasets:[
+            datasets: [
                 {
-                    label:"Your Expenses",
+                    label: "Your Expenses",
                     data: Object.values(data.mapper),
                     backgroundColor: data.colors,
-                    borderWidth:2,
-                    borderColor:"#1B2430",
+                    borderWidth: 2,
+                    borderColor: "#1B2430",
                     borderRadius: 3,
-                    weight:6,
-                    hoverOffset:3
+                    weight: 6,
+                    hoverOffset: 3
                 }
             ]
         }
 
     return (
         <section className="expense-chart">
-            <Pie data={chartData} options={{maintainAspectRatio: false, plugins:{legend:{labels:{font:{size:25}, color:"white"} }}}}></Pie>
+            <Pie data={chartData} options={
+                {
+                    maintainAspectRatio: false,
+                    plugins: {legend: {labels: {font: {size: 25}, color: "white"}}}
+                }}/>
         </section>);
 
 }
