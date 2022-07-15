@@ -28,11 +28,11 @@ const NewExpenseForm = ({updateExpenses} : Props) => {
         error: categoryError
     } = useFetch<GetCategoriesResponse>();
 
-    const submitExpenseForm = (e: SyntheticEvent) => {
+    const submitExpenseForm = async (e: SyntheticEvent) => {
         e.preventDefault();
         const url = "http://localhost:3001/api/expenses";
         const requestBody: CreateExpenseDto = {name: expense.name, value: expense.value, categoryId: expense.categoryId}
-        makeRequest(url, HttpMethod.POST, JSON.stringify(requestBody), {Authorization: `Bearer ${localStorage.getItem("token")}`, "Content-Type":"application/json"});
+        await makeRequest(url, HttpMethod.POST, JSON.stringify(requestBody), {Authorization: `Bearer ${localStorage.getItem("token")}`, "Content-Type":"application/json"});
         setExpense({name: "", value: 0, categoryId: expense.categoryId});
         updateExpenses("http://localhost:3001/api/expenses", HttpMethod.GET, undefined, {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -73,7 +73,7 @@ const NewExpenseForm = ({updateExpenses} : Props) => {
                 </div>
                 <div className="form-control">
                     <label htmlFor="value">
-                        <input type="number" name="value" required id="value" value={expense.value} min="1" step="0.01"
+                        <input type="number" name="value" required id="value" value={expense.value} min="0.01" step="0.01"
                                onChange={updateExpenseForm}
                                placeholder="value"/>
                     </label>

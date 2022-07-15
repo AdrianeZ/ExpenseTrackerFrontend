@@ -1,8 +1,11 @@
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {HttpMethod, BaseResponse} from "types";
+import {AuthContext} from "../context/authContext";
 
 
 const useFetch = <T extends BaseResponse>() => {
+
+    const {logout} = useContext(AuthContext);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | undefined>(undefined);
     const [data, setData] = useState<T | null>(null);
@@ -17,6 +20,14 @@ const useFetch = <T extends BaseResponse>() => {
 
         const defaultErrorMessage = "Unknown Server Error Occurred";
         setIsLoading(false);
+
+        if(response.status === 401)
+        {
+            setError(data.errorMessage);
+            logout();
+
+        }
+
         if (!data.status) {
             setError(defaultErrorMessage);
             return;
